@@ -1,0 +1,116 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/vazirmatn';
+
+/* ---------- Design tokens ----------
+   Cool paper, deep ink, two note colors that never change meaning:
+   ultramarine = what the professor said, teal = what I did. */
+:root {
+  --c-bg: #f2f4f7;
+  --c-surface: #ffffff;
+  --c-sunken: #e9ecf2;
+  --c-ink: #12141c;
+  --c-muted: #5d6577;
+  --c-line: #e1e5ec;
+  --c-said: #3b3bf5;
+  --c-said-tint: #e9e9fe;
+  --c-did: #0b8f70;
+  --c-did-tint: #dcf4ec;
+  --c-danger: #d6335a;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --c-bg: #0c0e13;
+    --c-surface: #151821;
+    --c-sunken: #1c202b;
+    --c-ink: #eceef4;
+    --c-muted: #9aa2b5;
+    --c-line: #252a37;
+    --c-said: #8f8fff;
+    --c-said-tint: #1d1d4a;
+    --c-did: #43d6ad;
+    --c-did-tint: #0f2e27;
+    --c-danger: #ff6b8b;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --c-bg: #0c0e13;
+  --c-surface: #151821;
+  --c-sunken: #1c202b;
+  --c-ink: #eceef4;
+  --c-muted: #9aa2b5;
+  --c-line: #252a37;
+  --c-said: #8f8fff;
+  --c-said-tint: #1d1d4a;
+  --c-did: #43d6ad;
+  --c-did-tint: #0f2e27;
+  --c-danger: #ff6b8b;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--c-bg);
+  --color-surface: var(--c-surface);
+  --color-sunken: var(--c-sunken);
+  --color-ink: var(--c-ink);
+  --color-muted: var(--c-muted);
+  --color-line: var(--c-line);
+  --color-said: var(--c-said);
+  --color-said-tint: var(--c-said-tint);
+  --color-did: var(--c-did);
+  --color-did-tint: var(--c-did-tint);
+  --color-danger: var(--c-danger);
+  --font-sans: 'Vazirmatn Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+html {
+  background: var(--c-bg);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--c-bg);
+  color: var(--c-ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+  outline: 2px solid var(--c-said);
+  outline-offset: 2px;
+}
+
+/* ---------- Small component utilities ---------- */
+@utility card {
+  @apply rounded-[22px] border border-line bg-surface;
+}
+@utility input {
+  @apply w-full rounded-xl border border-line bg-bg px-3.5 py-2.5 text-[15px] text-ink placeholder:text-muted;
+  @apply transition-colors focus:border-said focus:outline-none;
+}
+@utility btn {
+  @apply inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-xl px-4 text-[15px] font-semibold;
+  @apply transition-[transform,background-color,opacity] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40;
+}
+@utility btn-primary {
+  @apply btn bg-said text-white hover:opacity-90;
+}
+@utility btn-soft {
+  @apply btn bg-sunken text-ink hover:opacity-80;
+}
+@utility btn-text {
+  @apply inline-flex min-h-9 cursor-pointer items-center rounded-lg px-2 text-sm font-medium text-muted hover:text-ink;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
